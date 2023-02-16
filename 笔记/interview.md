@@ -1,5 +1,7 @@
 # 面试题
 
+## 一、基本数据类型的面试题
+
 ```java
 //第一题
 short s = 3;
@@ -110,3 +112,83 @@ System.out.println(a+b);//输出7.0
 17、为什么 byte b=10b会报错？
 答案：byte在java中表示字节，而b表示的是bit
 ```
+
+## 二、字符串常见面试题
+
+​	Java 程序中所有的双引号字符串，都是 String 类的对象 
+
+​	字符串不可变，它们的值在创建后不能被更改
+
+ 	虽然 String 的值是不可变的，但是它们可以被共享    
+
+问题：下列代码的运行结果是？
+
+```
+public class Test1{
+   public static void main(String[] args){
+       String s1="abc";
+       String s2="abc";  
+       System.out.println(s1==s2);	
+   }
+}
+```
+
+分析:都在常量池中
+
+问题：下列代码的运行结果是？    
+
+```
+public class Test2{
+   public static void main(String[] args){
+       String s1="abc";
+       String s2=new String("abc"); //创建两个对象
+       System.out.println(s1==s2);	
+   }
+}
+```
+
+分析: s1在常量池  , s2 在  堆内存中
+
+问题：下列代码的运行结果是？ 
+
+```
+public class Test3 {
+    public static void main(String[] args) { 
+        String s1 = "abc";
+        String s2 = "ab";
+        String s3 = s2 + "c";
+      
+        System.out.println(s1 == s3);  
+    }
+}
+```
+
+字符串对象使用"+"  拼接  会先转成StringBuildder 在进行append方法 最后toString方法  转成String对象
+
+问题：下列代码的运行结果是？
+
+```
+public class Test4 {
+	public static void main(String[] args) { 
+		String s1 = "abc";
+		String s2 = "a" + "b" + "c";
+		System.out.println(s1 == s2);
+	}
+}
+```
+
+ 分析: 常量优化机制
+
+: 常量与常量之间运算  直接算结果 再赋值
+
+### 字符串比较
+
+使用 == 做比较
+基本类型：比较的是数据值是否相同
+引用类型：比较的是地址值是否相同
+
+字符串是对象，它比较内容是否相同，是通过一个方法来实现的，这个方法叫：equals()
+  public boolean equals(Object anObject)：
+  将此字符串与指定对象进 行比较。由于我们比较的是字符串对象，所以参数直接传递一个字符串
+
+public  boolean equalsIgnoreCase?(String anotherString):忽略大小写
