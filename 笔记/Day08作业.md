@@ -55,6 +55,8 @@ day08作业
 
 ### 2.了解面向对象 类 对象 属性 方法？
 
+![image-20230217201334809](C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20230217201334809.png)
+
 `User.java文件有三个类外部类User、Teacher，内部类 User.Book`
 
 `静态代码块先执行（可能是存在堆里的静态变量区），然后是代码块 `
@@ -148,6 +150,32 @@ public class TestUser {
 
 见上面代码
 
+1）请说出作用域public，private，protected，以及不写时的区别？
+
+- public 声明的为公共成员变量和函数成员，在整个类内类外都可使用。
+
+- private 声明的为私有成员变量和函数成员，只在声明的类内可以使用。
+
+- protected声明的为受保护成员变量和函数成员，类外不可使用。类内可以使用。
+
+- 不使用关键字默认为类内使用
+
+
+另外注意在继承的时候，他们的区别。
+
+- public 声明的在子类变为public
+
+- protected 声明的子类变为private
+
+- private 声明的在子类中不可用
+
+| 作用域    | 当前类 | 包内 | 子类 | 包外 |
+| --------- | ------ | ---- | ---- | ---- |
+| public    | √      | √    | √    | √    |
+| protected | √      | √    | √    | ×    |
+| default   | √      | √    | ×    | ×    |
+| private   | √      | ×    | ×    | ×    |
+
 ### 4.掌握入口方法编写和执行，传参
 
 ![](https://raw.githubusercontent.com/shiyin-li/pic/master/img/202302152029977.png)
@@ -233,11 +261,6 @@ public class 微信信息时间显示效果案例带参数版 {
         }
     }
 }
-```
-
-### 7.编写一个工具jar程序包，再编写一个程序类来调用那个程序包？
-
-```java
 ```
 
 ### 8.单例设计模式 只能new一次 要点构造方法私有化

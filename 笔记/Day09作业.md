@@ -215,8 +215,8 @@ public class A {
     //类的静态变量 类名.age调用
     public static int age = 18;
 
-    public A(int id) {
-        this.id = id;
+    public A() {
+        System.out.println("我是A类的构造方法");
     }
     /*初始化程序块*/
     {
@@ -247,8 +247,8 @@ public class B extends A {
     //public B() {
     //    super();
     //}
-    public B() {
-        super(5);
+       public B() {
+        System.out.println("我是B类的构造方法");
     }
     //类的静态方法 类名.print()调用
     public static void print(){
@@ -288,10 +288,14 @@ public class TestAB {
 我是B类静态代码块
 我是A类的第一个代码块
 我是A类第二个代码块
+我是A类的构造方法
 我是B类的第一个代码块
 我是B类第二个代码块
+我是B类的构造方法
 ```
 
 分析：先执行的是静态代码块 先加载父类的静态代码块然后子类的静态代码块   
 
 ​			然后是初始化代码块 也是先加载父类的 
+
+​			最后执行构造方法 也是先加载父类的
