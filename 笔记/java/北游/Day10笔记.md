@@ -27,17 +27,13 @@ System.out.println(s2.hashCode()); //2484
 
 > 所以有可能不同的值计算出来的hashCode()相同，但是同一个值的hashCode()是不会变的，所以可以根据字符串值推算出它的hashCode(),但是不能根据hashCode()的值推算出字符串的值。
 
-```
 作用
-```
 
 > 我们平时经常用到map来存储对象，因为map是key，value形式的，它不像list形式的集合可以有顺序的从0开始往集合里放数据，而是随意的放，但是取值的话就很麻烦，因为它存放值的时候没有顺序，所以取值的时候根据key去里面一个一个对比，等找到key相等的值就取出，这样就会造成效率问题。
 >
-> 当我们用到hashCode()可以看到我们将name计算为3373707，age计算为98511，这样的话我们存值的时候就根据计算后的数值进行对应位置的存储，同样当我们get取值的时候再次将key计算为hashCode()值，因为同一个字符串hashCode()值相等，这个时候我们就可以直接根据hashCode()值将对应位置的数据取出，就不需要对key一个一个进行对比了，这样大大提高了效率，这就是为什么有hashCode()存在的原因了。
+> 当我们用到hashCode()可以看到我们将name计算为3373707，age计算为98511，这样的话我们存值的时候就根据计算后的数值进行对应位置的存储，同样当我们get取值的时候再次将key计算为hashCode()值，因为同一个字符串hashCode()值相等，这个时候我们就可以直接根据hashCode()值将对应位置的数据取出，就不需要对key一个一个进行对比了，这样大大提高了效率，这就是为什么有hashCode()存在的原因了。、
 
-```
 toString()
-```
 
 > toString()方法是Object类中的方法，而Java中所有的类都继承了object类。我们在使用时可以将其重写。那么，to String方法如何使用呢？
 
@@ -65,11 +61,39 @@ hashCode()效率是比equals()效率高的。
 
 ### 2.enum 枚举
 
-枚举是实例对象是固定，实例是自动new，每个枚举类会自动继承java.lang.Enum 抽象
+枚举是实例对象是固定，实例是自动new，每个枚举类会自动继承java.lang.Enum 抽象类
+
+枚举也可以叫枚举类，而枚举其实就是多例是有限个数的，一个类有多个实例，但实例的个数不是 无穷的。
+
+```java
+package cn.webrx;
+//首先枚举是一个特殊的class
+//这个class相当于final static修饰，不能被继承
+//他的构造方法强制被私有化，下面有一个默认的构造方法private ColorEnum();
+//所有的枚举都继承自java.lang.Enum类。由于Java 不支持多继承，所以枚举对象不能再继承其他类
+public enum ColorEnum {
+//每个枚举变量都是枚举类ColorEnum的实例，相当于RED=new ColorEnum（1），按序号来。
+//每个成员变量都是final static修饰
+RED, GREEN, BLANK, YELLOW;
+}
+
+//测试类
+public void ColorTest() {
+//ordinal返回枚举变量的序号
+for(ColorEnum color:ColorEnum.values()) {
+System.out.println(color+",ordinal:"+color.ordinal()+",name:"+color.name());
+	}
+}
+```
+
+**枚举类型的构造器必须私有**
+
 如何声明枚举？
 
 ```java
+//枚举类型的构造器必须私有
 public class EnumDemo {
+    //以下是三个枚举类
     enum en1 {a, b, c}
     enum color {RED, GREEN, BLUE}
     enum num {
@@ -78,7 +102,7 @@ public class EnumDemo {
         public int code;
         public String message;
         
-		//构造器
+		//构造器  默认构造器是私有的
         num(int code, String message) {
             this.code = code;
             this.message = message;
@@ -114,6 +138,12 @@ public class EnumDemo {
     }
 }
 ```
+
+注意，` 定义枚举类的关键字是enum，而不是Enum，所有关键字都是小写的！,枚举类继承了 java.lang.Enum类`
+
+其中FRONT、BEHIND、LEFT、RIGHT都是枚举项，它们都是本类的实例，本类一共就只有四个实例对 象。 
+
+在定义枚举项时，多个枚举项之间使用逗号分隔，最后一个枚举项后需要给出分号！但如果枚举类中只 有枚举项（没有构造器、方法、实例变量），那么可以省略分号！建议不要省略分号！ 不能使用new来创建枚举类的对象，因为枚举类中的实例就是类中的枚举项，所以在类外只能使用类名. 枚举项。
 
 ### 3.内部类
 
